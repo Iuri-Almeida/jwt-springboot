@@ -1,4 +1,4 @@
-package br.com.ialmeida.jwtspringboot.security;
+package br.com.ialmeida.jwtspringboot.security.jwt.filter.authentication;
 
 import br.com.ialmeida.jwtspringboot.details.UserDetail;
 import br.com.ialmeida.jwtspringboot.entities.User;
@@ -19,14 +19,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class JwtRequestFilter extends UsernamePasswordAuthenticationFilter {
+public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final int TOKEN_EXPIRATION = 600000;
     public static final String TOKEN_PASSWORD = "6ebde667-ee59-44a6-a928-81d71bb3b4a8";
 
     private final AuthenticationManager authenticationManager;
 
-    public JwtRequestFilter(AuthenticationManager authenticationManager) {
+    public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
 

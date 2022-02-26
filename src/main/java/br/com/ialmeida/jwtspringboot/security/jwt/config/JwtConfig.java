@@ -1,6 +1,8 @@
-package br.com.ialmeida.jwtspringboot.security;
+package br.com.ialmeida.jwtspringboot.security.jwt.config;
 
 import br.com.ialmeida.jwtspringboot.details.services.UserDetailServiceImpl;
+import br.com.ialmeida.jwtspringboot.security.jwt.filter.authentication.JwtAuthenticationFilter;
+import br.com.ialmeida.jwtspringboot.security.jwt.filter.validation.JwtValidationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -35,8 +37,8 @@ public class JwtConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .addFilter(new JwtRequestFilter(authenticationManager()))
-                .addFilter(new JwtValidateFilter(authenticationManager()))
+                .addFilter(new JwtAuthenticationFilter(authenticationManager()))
+                .addFilter(new JwtValidationFilter(authenticationManager()))
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 

@@ -1,5 +1,6 @@
-package br.com.ialmeida.jwtspringboot.security;
+package br.com.ialmeida.jwtspringboot.security.jwt.filter.validation;
 
+import br.com.ialmeida.jwtspringboot.security.jwt.filter.authentication.JwtAuthenticationFilter;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,12 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class JwtValidateFilter extends BasicAuthenticationFilter {
+public class JwtValidationFilter extends BasicAuthenticationFilter {
 
     private final String HEADER_ATTRIBUTE = "Authorization";
     private final String ATTRIBUTE_PREFIX = "Bearer ";
 
-    public JwtValidateFilter(AuthenticationManager authenticationManager) {
+    public JwtValidationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
     }
 
@@ -42,7 +43,7 @@ public class JwtValidateFilter extends BasicAuthenticationFilter {
     }
 
     private UsernamePasswordAuthenticationToken getAuthenticationToken(String token) {
-        String user = JWT.require(Algorithm.HMAC512(JwtRequestFilter.TOKEN_PASSWORD))
+        String user = JWT.require(Algorithm.HMAC512(JwtAuthenticationFilter.TOKEN_PASSWORD))
                 .build()
                 .verify(token)
                 .getSubject();
