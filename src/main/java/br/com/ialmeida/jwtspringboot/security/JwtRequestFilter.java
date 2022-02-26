@@ -22,7 +22,7 @@ import java.util.Date;
 public class JwtRequestFilter extends UsernamePasswordAuthenticationFilter {
 
     private final int TOKEN_EXPIRATION = 600000;
-    private final String TOKEN_PASSWORD = "6ebde667-ee59-44a6-a928-81d71bb3b4a8";
+    public static final String TOKEN_PASSWORD = "6ebde667-ee59-44a6-a928-81d71bb3b4a8";
 
     private final AuthenticationManager authenticationManager;
 
