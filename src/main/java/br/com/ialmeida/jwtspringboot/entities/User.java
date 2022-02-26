@@ -1,5 +1,7 @@
 package br.com.ialmeida.jwtspringboot.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -16,6 +18,8 @@ public class User implements Serializable {
 
     @Column(unique = true)
     private String login;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     public User() {
