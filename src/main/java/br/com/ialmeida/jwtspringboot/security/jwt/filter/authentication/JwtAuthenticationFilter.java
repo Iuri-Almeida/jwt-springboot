@@ -2,6 +2,7 @@ package br.com.ialmeida.jwtspringboot.security.jwt.filter.authentication;
 
 import br.com.ialmeida.jwtspringboot.details.UserDetail;
 import br.com.ialmeida.jwtspringboot.entities.User;
+import br.com.ialmeida.jwtspringboot.security.jwt.utils.JwtUtil;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,9 +21,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
-
-    private final int TOKEN_EXPIRATION = 600000;
-    public static final String TOKEN_PASSWORD = "6ebde667-ee59-44a6-a928-81d71bb3b4a8";
 
     private final AuthenticationManager authenticationManager;
 
@@ -52,8 +50,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         String token = JWT.create()
                 .withSubject(userDetail.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + TOKEN_EXPIRATION))
-                .sign(Algorithm.HMAC512(TOKEN_PASSWORD));
+                .withExpiresAt(new Date(System.currentTimeMillis() + JwtUtil.TOKEN_EXPIRATION))
+                .sign(Algorithm.HMAC512(JwtUtil.TOKEN_PASSWORD));
 
         response.getWriter().write(token);
         response.getWriter().flush();
