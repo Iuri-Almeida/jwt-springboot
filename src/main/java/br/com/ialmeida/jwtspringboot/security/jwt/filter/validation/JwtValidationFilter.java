@@ -43,11 +43,11 @@ public class JwtValidationFilter extends BasicAuthenticationFilter {
     }
 
     private UsernamePasswordAuthenticationToken getAuthenticationToken(String token) {
-        String user = JWT.require(Algorithm.HMAC512(JwtUtil.TOKEN_PASSWORD))
+        String username = JWT.require(Algorithm.HMAC512(JwtUtil.TOKEN_PASSWORD))
                 .build()
                 .verify(token)
                 .getSubject();
 
-        return (user == null) ? null : new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+        return (username == null) ? null : new UsernamePasswordAuthenticationToken(username, null, new ArrayList<>());
     }
 }
